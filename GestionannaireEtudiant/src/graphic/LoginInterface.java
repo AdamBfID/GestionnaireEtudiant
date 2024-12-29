@@ -24,14 +24,12 @@ public class LoginInterface {
         ImageIcon appIcon = new ImageIcon(LoginInterface.class.getResource("/resources/app_icon.png"));
         frame.setIconImage(appIcon.getImage());
         frame.setVisible(true);
-        // Custom colors for futuristic theme
+
         Color bgColor = new Color(8, 10, 32);
         Color accentColor = new Color(164, 196, 25);
         Color buttonColor = new Color(255, 255, 255);
         Image backgroundImage = new ImageIcon(LoginInterface.class.getResource("/resources/backgground.png")).getImage();
 
-       
-        // Main panel with custom gradient background
         JPanel mainPanel = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -39,11 +37,11 @@ public class LoginInterface {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-                // Get the size of the panel
+             
                 int w = getWidth();
                 int h = getHeight();
 
-                // Draw the image scaled to the size of the panel
+             
                 g2d.drawImage(backgroundImage, 0, 0, w, h, this);
             }
         };
@@ -60,13 +58,12 @@ public class LoginInterface {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Title label with custom font
-     // Define colors
+
         Color primaryTextColor = new Color(255, 255, 255);
         Color fieldBackgroundColor = new Color(255, 255, 255, 240);
         Color accentColor1 = new Color(41, 128, 185);
 
-        // Add logo
+      
         ImageIcon originalIcon = new ImageIcon("/resources/app_icon.png");  
         Image scaledImage = originalIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         JLabel logoLabel = new JLabel(new ImageIcon(scaledImage));
@@ -76,7 +73,6 @@ public class LoginInterface {
         gbc.insets = new Insets(20, 0, 10, 0);
         formPanel.add(logoLabel, gbc);
 
-        // Title with enhanced styling
         JLabel titleLabel = new JLabel("Gestionnaire de GMAM");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
         titleLabel.setForeground(primaryTextColor);
@@ -86,7 +82,6 @@ public class LoginInterface {
         gbc.insets = new Insets(0, 0, 20, 0);
         formPanel.add(titleLabel, gbc);
 
-        // Username label and field
         JLabel userLabel = new JLabel("Utilisateur");
         userLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
         userLabel.setForeground(primaryTextColor);
@@ -119,7 +114,6 @@ public class LoginInterface {
         gbc.insets = new Insets(5, 0, 5, 0);
         formPanel.add(userTextField, gbc);
 
-        // Password label and field
         JLabel passLabel = new JLabel("Password");
         passLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
         passLabel.setForeground(primaryTextColor);
@@ -152,7 +146,6 @@ public class LoginInterface {
         gbc.insets = new Insets(5, 0, 5, 0);
         formPanel.add(passField, gbc);
 
-        // Add focus listeners for hover effect
         userTextField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -189,7 +182,7 @@ public class LoginInterface {
             }
         });
 
-        // Status label
+
         JLabel statusLabel = new JLabel(" ");
         statusLabel.setFont(new Font("Arial", Font.BOLD, 12));
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -199,39 +192,37 @@ public class LoginInterface {
         gbc.gridwidth = 2;
         formPanel.add(statusLabel, gbc);
 
-        // Numpad panel with custom styling
-        JPanel numpadPanel = new JPanel(new GridLayout(4, 3, 15, 15));  // Increased spacing
+    
+        JPanel numpadPanel = new JPanel(new GridLayout(4, 3, 15, 15)); 
         numpadPanel.setOpaque(false);
-        numpadPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 50, 50));  // Larger padding
+        numpadPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 50, 50));  
         mainPanel.add(numpadPanel, BorderLayout.CENTER);
 
-        // Create shuffled number buttons
+       
         ArrayList<Integer> numbers = new ArrayList<>();
         for (int i = 0; i <= 9; i++) {
             numbers.add(i);
         }
         Collections.shuffle(numbers);
 
-        // Enhanced FuturisticButton class
+    
         class FuturisticButton extends JButton {
-            private Color hoverColor = new Color(70, 130, 180);  // Steel blue
-            private Color normalColor = new Color(47, 53, 66);  // Dodger blue
+            private Color hoverColor = new Color(70, 130, 180); 
+            private Color normalColor = new Color(47, 53, 66);  
             private boolean isLoginButton;
 
             FuturisticButton(String text, boolean isLoginButton) {
                 super(text);
                 this.isLoginButton = isLoginButton;
-                
-                // Modern styling
+              
                 setFont(new Font("Segoe UI", Font.BOLD, 20));
                 setForeground(Color.WHITE);
                 setFocusPainted(false);
                 setBorderPainted(false);
                 setContentAreaFilled(false);
-                setPreferredSize(new Dimension(80, 80));  // Larger buttons
+                setPreferredSize(new Dimension(80, 80));  
                 setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-                // Enhanced hover effects
                 addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseEntered(MouseEvent e) {
@@ -263,8 +254,7 @@ public class LoginInterface {
             protected void paintComponent(Graphics g) {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                
-                // Gradient paint
+       
                 GradientPaint gradient = new GradientPaint(
                     0, 0, 
                     isLoginButton ? new Color(41, 128, 185) : normalColor,
@@ -273,21 +263,20 @@ public class LoginInterface {
                 );
                 g2d.setPaint(gradient);
 
-                // Button shape with drop shadow
                 int shadowGap = 3;
                 int shadowOffset = 2;
                 Color shadowColor = new Color(0, 0, 0, 50);
                 
-                // Draw shadow
+                
                 g2d.setColor(shadowColor);
                 g2d.fillRoundRect(shadowOffset, shadowOffset, 
                     getWidth() - shadowGap - 1, getHeight() - shadowGap - 1, 25, 25);
 
-                // Draw button
+               
                 g2d.setPaint(gradient);
                 g2d.fillRoundRect(0, 0, getWidth() - shadowGap, getHeight() - shadowGap, 25, 25);
 
-                // Add subtle highlight
+                
                 g2d.setColor(new Color(255, 255, 255, 30));
                 g2d.fillRoundRect(0, 0, getWidth() - shadowGap, getHeight() / 2 - shadowGap, 25, 25);
 
@@ -295,15 +284,15 @@ public class LoginInterface {
             }
         }
 
-        // Add number buttons
+      
         for (int number : numbers) {
             JButton button = new FuturisticButton(String.valueOf(number), false);
             numpadPanel.add(button);
             button.addActionListener(e -> passField.setText(passField.getText() + button.getText()));
         }
 
-        // Add backspace button with custom icon
-        JButton backspaceButton = new FuturisticButton("⌫", false);  // Unicode backspace symbol
+       
+        JButton backspaceButton = new FuturisticButton("⌫", false);  
         numpadPanel.add(backspaceButton);
         backspaceButton.addActionListener(e -> {
             String currentText = passField.getText();
@@ -312,7 +301,7 @@ public class LoginInterface {
             }
         });
 
-        // Add login button with enhanced styling
+        
         JButton loginButton = new FuturisticButton("LOGIN", true);
         numpadPanel.add(loginButton);
         loginButton.addActionListener(e -> {
@@ -323,14 +312,13 @@ public class LoginInterface {
                     statusLabel.setText("Admin login successful!");
                     statusLabel.setForeground(new Color(0, 255, 128));
 
-                    // Close the login frame and open the admin interface
+                  
                     frame.dispose();
                     SwingUtilities.invokeLater(() -> new AdminInterface());
                 } else {
                 	 statusLabel.setText("Login successful (Enseignant)!");
                      statusLabel.setForeground(new Color(0, 255, 128));
 
-                     // Close the login frame and open the teacher interface
                      frame.dispose();
                      SwingUtilities.invokeLater(() -> new EnseignantInterface(username));
                 }
