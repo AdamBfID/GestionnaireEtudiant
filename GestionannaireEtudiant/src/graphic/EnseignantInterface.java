@@ -11,12 +11,12 @@ import java.io.IOException;
 
 
 public class EnseignantInterface {
-    // Custom colors
-    private static final Color PRIMARY_DARK = new Color(8, 10, 32);
-    private static final Color ACCENT_GREEN = new Color(47, 53, 66);
-    private static final Color BACKGROUND_COLOR = new Color(245, 245, 250);
-    private static final Color TABLE_HEADER_COLOR = new Color(30, 35, 65);
-    private static final Color TABLE_ALTERNATE_ROW = new Color(240, 240, 245);
+
+    private static final Color couleur1 = new Color(8, 10, 32);
+    private static final Color couleur2 = new Color(47, 53, 66);
+    private static final Color couleurApp = new Color(245, 245, 250);
+    private static final Color CouleurTableu = new Color(30, 35, 65);
+    private static final Color CouleurLignes = new Color(240, 240, 245);
 
     private String numcin;
 
@@ -24,43 +24,36 @@ public class EnseignantInterface {
         this.numcin = numcin;
 
         try {
-            // Set system look and feel for better integration
+        
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Fetch teacher's info
         TeacherInfo teacherInfo = fetchTeacherInfo(numcin);
         if (teacherInfo == null) {
             JOptionPane.showMessageDialog(null, "Enseignant introuvable!", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Create and setup main frame
         JFrame frame = new JFrame("Interface Enseignant");
         frame.setSize(1200, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout(0, 20));
-        frame.getContentPane().setBackground(BACKGROUND_COLOR);
+        frame.getContentPane().setBackground(couleurApp);
         ImageIcon appIcon = new ImageIcon(LoginInterface.class.getResource("/resources/app_icon.png"));
         frame.setIconImage(appIcon.getImage());
 
-        // Create welcome panel with gradient
         JPanel welcomePanel = createWelcomePanel(teacherInfo.getName());
-
-        // Create table panel
         JPanel tablePanel = createTablePanel(teacherInfo);
-
-        // Create button panel
         JPanel buttonPanel = createButtonPanel(teacherInfo);
 
-        // Add panels to frame with margins
+
         frame.add(welcomePanel, BorderLayout.NORTH);
         frame.add(tablePanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add padding around the frame
+   
         ((JPanel)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         frame.setLocationRelativeTo(null);
@@ -74,8 +67,8 @@ public class EnseignantInterface {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-                GradientPaint gradient = new GradientPaint(0, 0, PRIMARY_DARK, getWidth(), 0, 
-                    new Color(PRIMARY_DARK.getRed() + 20, PRIMARY_DARK.getGreen() + 20, PRIMARY_DARK.getBlue() + 20));
+                GradientPaint gradient = new GradientPaint(0, 0, couleur1, getWidth(), 0, 
+                    new Color(couleur1.getRed() + 20, couleur1.getGreen() + 20, couleur1.getBlue() + 20));
                 g2d.setPaint(gradient);
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
@@ -85,7 +78,7 @@ public class EnseignantInterface {
 
         JLabel welcomeLabel = new JLabel("Bienvenue, " + teacherName + " !");
         welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        welcomeLabel.setForeground(ACCENT_GREEN);
+        welcomeLabel.setForeground(couleur2);
         welcomePanel.add(welcomeLabel);
 
         return welcomePanel;
@@ -93,11 +86,11 @@ public class EnseignantInterface {
 
     private JPanel createTablePanel(TeacherInfo teacherInfo) {
         JPanel tablePanel = new JPanel(new BorderLayout(0, 10));
-        tablePanel.setBackground(BACKGROUND_COLOR);
+        tablePanel.setBackground(couleurApp);
         
         JLabel subtitleLabel = new JLabel("Liste des étudiants de la classe: " + teacherInfo.getClassID() + " ,et de matière: "+ teacherInfo.getSpec());
         subtitleLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        subtitleLabel.setForeground(PRIMARY_DARK);
+        subtitleLabel.setForeground(couleur1);
         subtitleLabel.setHorizontalAlignment(SwingConstants.LEFT);
         tablePanel.add(subtitleLabel, BorderLayout.NORTH);
 
@@ -124,14 +117,14 @@ public class EnseignantInterface {
         studentTable.setRowHeight(30);
         studentTable.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         studentTable.setGridColor(new Color(200, 200, 200));
-        studentTable.setSelectionBackground(ACCENT_GREEN);
+        studentTable.setSelectionBackground(couleur2);
         studentTable.setSelectionForeground(Color.BLACK);
         studentTable.setShowVerticalLines(true);
         studentTable.setShowHorizontalLines(true);
 
         // Style table header
         JTableHeader header = studentTable.getTableHeader();
-        header.setBackground(TABLE_HEADER_COLOR);
+        header.setBackground(CouleurTableu);
         header.setForeground(Color.BLACK);
         header.setFont(new Font("Segoe UI", Font.BOLD, 14));
         header.setPreferredSize(new Dimension(header.getPreferredSize().width, 40));
@@ -142,7 +135,7 @@ public class EnseignantInterface {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 if (!isSelected) {
-                    component.setBackground(row % 2 == 0 ? Color.WHITE : TABLE_ALTERNATE_ROW);
+                    component.setBackground(row % 2 == 0 ? Color.WHITE : CouleurLignes);
                 }
                 return component;
             }
@@ -162,7 +155,7 @@ public class EnseignantInterface {
 
     private JPanel createButtonPanel(TeacherInfo teacherInfo) {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
-        buttonPanel.setBackground(BACKGROUND_COLOR);
+        buttonPanel.setBackground(couleurApp);
 
         JButton saveButton = new JButton("Enregistrer Notes");
         JButton printButton = new JButton("Imprimer");
@@ -213,7 +206,7 @@ public class EnseignantInterface {
     private void setupButtonStyle(JButton button) {
         button.setFont(new Font("Segoe UI", Font.BOLD, 14));
         button.setPreferredSize(new Dimension(200, 40));
-        button.setBackground(ACCENT_GREEN);
+        button.setBackground(couleur2);
         button.setForeground(Color.BLACK);
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15));
@@ -224,7 +217,7 @@ public class EnseignantInterface {
             }
 
             public void mouseExited(MouseEvent e) {
-                button.setBackground(ACCENT_GREEN);
+                button.setBackground(couleur2);
             }
         });
     }
