@@ -8,16 +8,14 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
 
 public class AdminInterface extends JFrame {
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private static AdminInterface instance;
 	private JPanel mainPanel, sideNavPanel, contentPanel;
     private CardLayout cardLayout;
     private Connection conn;
-    private Color primaryColor = new Color(47, 53, 66); // Sidebar color
-    private Color accentColor = new Color(86, 101, 115); // Button hover/active color
+    private Color primaryColor = new Color(47, 53, 66); 
+    private Color accentColor = new Color(86, 101, 115);
     private Color textColor = new Color(236, 240, 241);
 
     
@@ -57,18 +55,11 @@ public class AdminInterface extends JFrame {
 
         mainPanel = new JPanel(new BorderLayout());
 
- 
-    
-
- 
-
-     // Set up the contentPanel
     	contentPanel = new JPanel();
     	cardLayout = new CardLayout();
     	contentPanel.setLayout(cardLayout);
     	contentPanel.setBackground(Color.WHITE);
 
-     // Add the contentPanel to the center of the mainPanel
 	   mainPanel.add(contentPanel, BorderLayout.CENTER);
 
         add(mainPanel);
@@ -77,26 +68,23 @@ public class AdminInterface extends JFrame {
     private void createSideNav() {
     	sideNavPanel = new JPanel();
         sideNavPanel.setPreferredSize(new Dimension(280, getHeight()));
-        sideNavPanel.setBackground(new Color(31, 41, 55));  // Darker blue-gray
+        sideNavPanel.setBackground(new Color(31, 41, 55));
         sideNavPanel.setLayout(new BoxLayout(sideNavPanel, BoxLayout.Y_AXIS));
 
-        // Add padding to the entire panel
         sideNavPanel.setBorder(BorderFactory.createEmptyBorder(20, 15, 20, 15));
 
-        // Add logo or title
+      
         
         JPanel logoPanel = new JPanel();
         logoPanel.setLayout(new BoxLayout(logoPanel, BoxLayout.Y_AXIS));
         logoPanel.setBackground(new Color(31, 41, 55));
         logoPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 30, 0));
 
-        // Add logo icon (using text as placeholder)
-        JLabel logoIcon = new JLabel("👨‍🎓");  // Unicode school emoji
+        JLabel logoIcon = new JLabel("👨‍🎓");  
         logoIcon.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 40));
         logoIcon.setForeground(Color.WHITE);
         logoIcon.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Add title with custom styling
         JLabel titleLabel = new JLabel("GMAM Admin");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
@@ -104,7 +92,7 @@ public class AdminInterface extends JFrame {
         
         JLabel subtitleLabel = new JLabel("Panneau d'administration");
         subtitleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        subtitleLabel.setForeground(new Color(156, 163, 175));  // Light gray
+        subtitleLabel.setForeground(new Color(156, 163, 175));
         subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         logoPanel.add(logoIcon);
@@ -116,7 +104,7 @@ public class AdminInterface extends JFrame {
         sideNavPanel.add(logoPanel);
         sideNavPanel.add(Box.createVerticalStrut(20));
 
-        // Create navigation buttons
+      
         String[] navItems = {"Etudiants", "Enseignent", "Matière", "classe"};
         for (String item : navItems) {
             JButton navButton = createStyledNavButton(item);
@@ -126,7 +114,7 @@ public class AdminInterface extends JFrame {
         
         sideNavPanel.add(Box.createVerticalGlue());
         JButton logoutButton = createStyledNavButton("Déconnexion");
-        logoutButton.setBackground(new Color(185, 28, 28));  // Red background
+        logoutButton.setBackground(new Color(185, 28, 28)); 
         sideNavPanel.add(logoutButton);
         logoutButton.addActionListener(e-> { SwingUtilities.invokeLater(() -> new LoginInterface());AdminInterface.disposeAdmin();});
         mainPanel.add(sideNavPanel, BorderLayout.WEST);
@@ -150,8 +138,8 @@ public class AdminInterface extends JFrame {
             }
         };
 
-        button.setForeground(textColor); // Explicitly set text color
-        button.setFont(new Font("Arial", Font.PLAIN, 14)); // Explicitly set font
+        button.setForeground(textColor); 
+        button.setFont(new Font("Arial", Font.PLAIN, 14)); 
         button.setBorderPainted(false);
         button.setFocusPainted(false);
         button.setContentAreaFilled(false);
@@ -166,7 +154,7 @@ public class AdminInterface extends JFrame {
         JButton button = new JButton(text);
         button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         button.setForeground(Color.WHITE);
-        button.setBackground(new Color(55, 65, 81));  // Slightly lighter than background
+        button.setBackground(new Color(55, 65, 81));  
         button.setMaximumSize(new Dimension(250, 45));
         button.setPreferredSize(new Dimension(250, 45));
         button.setBorderPainted(false);
@@ -174,14 +162,14 @@ public class AdminInterface extends JFrame {
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        // Add hover effect
+       
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(75, 85, 99));  // Lighter on hover
+                button.setBackground(new Color(75, 85, 99)); 
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(55, 65, 81));  // Return to original color
+                button.setBackground(new Color(55, 65, 81));  
             }
         });
         button.addActionListener(e -> cardLayout.show(contentPanel, text));
@@ -189,7 +177,6 @@ public class AdminInterface extends JFrame {
         return button;
     }
 
-    // Add this method to handle active state
     public void setActiveNavButton(JButton activeButton) {
         // Reset all buttons
         for (Component comp : sideNavPanel.getComponents()) {
@@ -198,10 +185,9 @@ public class AdminInterface extends JFrame {
                 button.setBackground(new Color(55, 65, 81));
             }
         }
-        
-        // Set active button
+
         if (activeButton != null) {
-            activeButton.setBackground(new Color(79, 70, 229));  // Indigo color for active state
+            activeButton.setBackground(new Color(79, 70, 229)); 
         }
     }
 
@@ -220,7 +206,7 @@ public class AdminInterface extends JFrame {
 
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
-        field.setPreferredSize(new Dimension(200, 25)); // Match text field size
+        field.setPreferredSize(new Dimension(200, 25)); 
         panel.add(field, gbc);
     }
     
@@ -241,7 +227,6 @@ public class AdminInterface extends JFrame {
         studentPanel.setBackground(Color.WHITE);
         studentPanel.setBorder(BorderFactory.createTitledBorder("Ajouter un etudiant"));
 
-        // Create table model and table
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
         table.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -255,15 +240,7 @@ public class AdminInterface extends JFrame {
         model.addColumn("adresse");
         model.addColumn("Phone");
         model.addColumn("classID");
-
-     // Title label with custom font
-        
-        
-        
-
-        
-        // Create form panel
-        
+     
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -293,8 +270,7 @@ public class AdminInterface extends JFrame {
         addFormField(formPanel, "Email:", emailField, gbc, 3);
         addFormField(formPanel, "Phone:", phoneField, gbc, 4);
    
-        
-        // Add buttons
+
         JPanel buttonPanel = new JPanel(new FlowLayout());
         
 
@@ -308,7 +284,6 @@ public class AdminInterface extends JFrame {
         buttonPanel.add(deleteButton);
  
 
-        // Add action listeners
         addButton.addActionListener(e -> {
             try {
             	
@@ -322,7 +297,7 @@ public class AdminInterface extends JFrame {
                 stmt.setString(6, emailField.getText());
                 stmt.setString(7, addressField.getText());
                 stmt.setString(8, phoneField.getText());
-                stmt.setString(9, (String) classIdField.getSelectedItem()); // Get selected value from JComboBox
+                stmt.setString(9, (String) classIdField.getSelectedItem()); 
                 stmt.setString(10, new String(passwordField.getPassword()));
 
                 stmt.executeUpdate();
@@ -340,16 +315,12 @@ public class AdminInterface extends JFrame {
             try {
                 String matriculeText = matriculeField.getText().trim();
                 
-                // Check if the matricule field is empty
+             
                 if (matriculeText.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Matricule field cannot be empty. Please enter a valid matricule.", "Input Error", JOptionPane.ERROR_MESSAGE);
-                    return; // Exit the method
+                    return; 
                 }
-                
-                // Parse the matricule field to an integer
                 int matricule = Integer.parseInt(matriculeText);
-
-                // SQL query to delete the student
                 String sql = "DELETE FROM etudiant WHERE matricule = ?";
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, matricule);
@@ -360,8 +331,6 @@ public class AdminInterface extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "No student found with the given matricule.", "Not Found", JOptionPane.WARNING_MESSAGE);
                 }
-
-                // Refresh the table and clear the field
                 refreshStudentTable(model);
                 matriculeField.setText("");
 
@@ -383,7 +352,7 @@ public class AdminInterface extends JFrame {
                 stmt.setString(5, emailField.getText());
                 stmt.setString(6, addressField.getText());
                 stmt.setString(7, phoneField.getText());
-                stmt.setString(9, (String) classIdField.getSelectedItem()); // Get selected value from JComboBox
+                stmt.setString(9, (String) classIdField.getSelectedItem()); 
                 stmt.setString(10, new String(passwordField.getPassword())); 
                 stmt.setInt(10, Integer.parseInt(matriculeField.getText()));
 
@@ -402,7 +371,6 @@ public class AdminInterface extends JFrame {
         });
 
 
-        // Add components to panel
         studentPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         studentPanel.add(formPanel, BorderLayout.NORTH);
         studentPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -434,7 +402,7 @@ public class AdminInterface extends JFrame {
 
     private void refreshStudentTable(DefaultTableModel model) {
         try {
-            model.setRowCount(0); // Clear existing rows
+            model.setRowCount(0); 
             String sql = "SELECT matricule, Nom, Prenom, numCin, DateNaissance, email, adresse, numtel, ClassegmamID FROM etudiant";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -457,26 +425,20 @@ public class AdminInterface extends JFrame {
             JOptionPane.showMessageDialog(this, "Error refreshing table!");
         }
     }
-    
-    
-
-
     private void createEnseignantPanel() {
         JPanel EnseignantPanel = new JPanel(new BorderLayout());
         EnseignantPanel.setBackground(Color.WHITE);
         EnseignantPanel.setBorder(BorderFactory.createTitledBorder("Ajouter un enseignent"));
         contentPanel.add(EnseignantPanel, "Enseignent");
 
-        // Create table model and table
+    
         DefaultTableModel model2 = new DefaultTableModel();
         JTable table = new JTable(model2);
         table.setFont(new Font("Arial", Font.PLAIN, 14));
         table.setRowHeight(25);
         
-        // Enable table selection
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        // Add table to a scroll pane
         JScrollPane scrollPane = new JScrollPane(table);
         EnseignantPanel.add(scrollPane, BorderLayout.CENTER);
 
@@ -500,7 +462,6 @@ public class AdminInterface extends JFrame {
         JComboBox<String> classIdField = new JComboBox<>(new String[]{"A1", "B1", "A2", "B2", "3FM", "3TS"});
         JTextField passwordField = new JTextField(20);
 
-        // Add form fields in correct order
         addFormField(formPanel, "Num CIN:", numcinField, gbc, 0);
         addFormField(formPanel, "Nom:", nomField, gbc, 1);
         addFormField(formPanel, "Prenom:", prenomField, gbc, 2);
@@ -511,7 +472,7 @@ public class AdminInterface extends JFrame {
 
         EnseignantPanel.add(formPanel, BorderLayout.NORTH);
 
-        // Add buttons
+     
         JPanel buttonPanel1 = new JPanel(new FlowLayout());
         buttonPanel1.setBackground(Color.WHITE);
 
@@ -525,7 +486,7 @@ public class AdminInterface extends JFrame {
 
         EnseignantPanel.add(buttonPanel1, BorderLayout.SOUTH);
 
-        // Add table selection listener to populate form
+    
         table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 int selectedRow = table.getSelectedRow();
@@ -540,8 +501,6 @@ public class AdminInterface extends JFrame {
             }
         });
 
-        // Validate input fields
-       
 
         addButton1.addActionListener(e -> {
             
@@ -574,8 +533,7 @@ public class AdminInterface extends JFrame {
             try {
                 String sql = "UPDATE enseignant SET nom = ?, prenom = ?, email = ?, spec = ?, classID = ?, password = ? WHERE numcin = ?";
                 PreparedStatement stmt = conn.prepareStatement(sql);
-                
-                // Set parameters in correct order
+               
                 stmt.setString(1, nomField.getText().trim());
                 stmt.setString(2, prenomField.getText().trim());
                 stmt.setString(3, emailField.getText().trim());
@@ -648,7 +606,7 @@ public class AdminInterface extends JFrame {
   
     private void refreshEnseignantTable(DefaultTableModel model) {
         try {
-            model.setRowCount(0); // Clear existing rows
+            model.setRowCount(0); 
             String sql = "SELECT numcin, prenom, nom, email, spec, classID, password FROM enseignant";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -678,7 +636,7 @@ public class AdminInterface extends JFrame {
         ecuePanel.setLayout(new BorderLayout());
         contentPanel.add(ecuePanel, "Matière");
 
-        // Top panel for input fields
+       
         JPanel inputPanel = new JPanel(new GridLayout(9, 2));
         inputPanel.setBorder(BorderFactory.createTitledBorder("Ajouter Matière"));
         inputPanel.setBackground(Color.WHITE);
@@ -719,7 +677,6 @@ public class AdminInterface extends JFrame {
         JButton btnRefresh = createStyledButton("Modifier");
         JButton btnDelete = createStyledButton("Supprimer");
 
-        // Buttons for actions
        
 
         JPanel buttonPanel = new JPanel();
@@ -727,25 +684,21 @@ public class AdminInterface extends JFrame {
         buttonPanel.add(btnRefresh);
         buttonPanel.add(btnDelete);
 
-        // Table for displaying records
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(new String[]{"Matière ID", "Nom", "VH Cours", "VH TP", "VH TD", "Crédit", "Coefficient", "Régime", "Module ID"});
         JTable table = new JTable(tableModel);
 
-        // Add panels to the main panel
         ecuePanel.add(inputPanel, BorderLayout.NORTH);
         ecuePanel.add(new JScrollPane(table), BorderLayout.CENTER);
         ecuePanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Database connection details
         final String url = "jdbc:mysql://localhost:3306/gestionnaire_etudiant";
         final String user = "root";
         final String pass = "root";
 
-        // Load data initially
+   
         loadMatieres(tableModel, url, user, pass);
 
-        // Action for adding a new record
         btnAdd.addActionListener(e -> {
             try (Connection conn = DriverManager.getConnection(url, user, pass)) {
                 String query = "INSERT INTO matiere (MatiéreID, Nom, vh_cour, vh_TP, vh_TD, credit, coefficient, regime, ModuleID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -770,7 +723,7 @@ public class AdminInterface extends JFrame {
             }
         });
 
-        // Action for refreshing the table
+
         btnRefresh.addActionListener(e -> loadMatieres(tableModel, url, user, pass));
     }
 
@@ -811,7 +764,7 @@ public class AdminInterface extends JFrame {
         classPanel.setBackground(Color.WHITE);
         contentPanel.add(classPanel, "classe");
 
-        // Input Panel
+
         JPanel inputPanel = new JPanel(new GridLayout(4, 2, 10, 10));
         inputPanel.setBorder(BorderFactory.createTitledBorder("Ajouter Classe"));
 
@@ -823,12 +776,11 @@ public class AdminInterface extends JFrame {
         inputPanel.add(new JLabel("Niveau:"));
         inputPanel.add(comboNiveau);
 
-        // Table for Displaying Classes
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(new String[]{"Class ID", "Niveau", "Nombre Etudiants"});
         JTable table = new JTable(tableModel);
 
-        // Buttons
+        
         JButton btnAdd = createStyledButton("Ajouter");
         JButton btnRefresh = createStyledButton("Actualiser");
         JButton btnViewTeachers = createStyledButton("Voir Enseignants");
@@ -838,20 +790,18 @@ public class AdminInterface extends JFrame {
         buttonPanel.add(btnRefresh);
         buttonPanel.add(btnViewTeachers);
 
-        // Add components to the main panel
+        
         classPanel.add(inputPanel, BorderLayout.NORTH);
         classPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         classPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Database connection details
         final String url = "jdbc:mysql://localhost:3306/gestionnaire_etudiant";
         final String user = "root";
         final String pass = "root";
 
-        // Load data into the table initially
+       
         loadClasses(tableModel, url, user, pass);
 
-        // Add Class Button Action
         btnAdd.addActionListener(e -> {
             try (Connection conn = DriverManager.getConnection(url, user, pass)) {
                 String query = "INSERT INTO Classe (ClassID, Niveau, NombreEtud) VALUES (?, ?, ?)";
@@ -859,7 +809,7 @@ public class AdminInterface extends JFrame {
 
                 stmt.setString(1, txtClassID.getText());
                 stmt.setInt(2, (Integer) comboNiveau.getSelectedItem());
-                stmt.setInt(3, 0); // Initial number of students is 0
+                stmt.setInt(3, 0); 
 
                 stmt.executeUpdate();
                 JOptionPane.showMessageDialog(classPanel, "Classe ajoutée avec succès!");
@@ -869,10 +819,8 @@ public class AdminInterface extends JFrame {
             }
         });
 
-        // Refresh Button Action
         btnRefresh.addActionListener(e -> loadClasses(tableModel, url, user, pass));
 
-        // View Teachers Button Action
         btnViewTeachers.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {
@@ -894,7 +842,7 @@ public class AdminInterface extends JFrame {
                     teacherList.append(rs.getString("nom")).append(" ").append(rs.getString("prenom")).append("\n");
                 }
 
-                if (teacherList.length() == 11) { // No teachers found
+                if (teacherList.length() == 11) { 
                     teacherList.append("Aucun enseignant trouvé.");
                 }
 
@@ -911,7 +859,7 @@ public class AdminInterface extends JFrame {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-            tableModel.setRowCount(0); // Clear the table
+            tableModel.setRowCount(0); 
             while (rs.next()) {
                 tableModel.addRow(new Object[]{
                     rs.getString("ClassID"),
@@ -923,16 +871,11 @@ public class AdminInterface extends JFrame {
             JOptionPane.showMessageDialog(null, "Erreur: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-
-    
-
     private void clearFields(JTextField... fields) {
         for (JTextField field : fields) {
             field.setText("");
         }
     }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new AdminInterface());
     }
