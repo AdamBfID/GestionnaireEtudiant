@@ -183,14 +183,10 @@ public class LoginInterface {
         });
 
 
-        JLabel statusLabel = new JLabel(" ");
-        statusLabel.setFont(new Font("Arial", Font.BOLD, 12));
-        statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        statusLabel.setForeground(accentColor1);
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;
-        formPanel.add(statusLabel, gbc);
+      
 
     
         JPanel numpadPanel = new JPanel(new GridLayout(4, 3, 15, 15)); 
@@ -309,22 +305,17 @@ public class LoginInterface {
             String password = passField.getText();
             if (validateLogin(username, password)) {
                 if (isAdmin(username, password)) {
-                    statusLabel.setText("Admin login successful!");
-                    statusLabel.setForeground(new Color(0, 255, 128));
-
-                  
                     frame.dispose();
                     SwingUtilities.invokeLater(() -> new AdminInterface());
                 } else {
-                	 statusLabel.setText("Login successful (Enseignant)!");
-                     statusLabel.setForeground(new Color(0, 255, 128));
+                	 
 
                      frame.dispose();
                      SwingUtilities.invokeLater(() -> new EnseignantInterface(username));
                 }
             } else {
-                statusLabel.setText("Nom d'utilisateur ou mot de passe incorrecte");
-                statusLabel.setForeground(new Color(255, 64, 64));
+                JOptionPane.showMessageDialog(null, "Utilisateur ou mot de passe introuvable", "Erreur", JOptionPane.ERROR_MESSAGE);
+               
             }
         });
 
